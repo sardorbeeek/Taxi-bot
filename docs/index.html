@@ -52,17 +52,16 @@
 <body>
     <h1>Book a Taxi</h1>
     <form id="booking-form">
-        <!-- Route Selection (Dropdown) -->
         <select id="route" name="route" required>
             <option value="" disabled selected>Choose a route</option>
             <option value="Jom - Samarqand">Jom → Samarqand</option>
             <option value="Jom - Tashkent">Jom → Tashkent</option>
         </select>
 
-        <!-- Date and Time -->
+        
         <input type="datetime-local" id="when" name="when" required>
 
-        <!-- Number of Passengers -->
+        
         <select id="passengers" name="passengers" required>
             <option value="" disabled selected>How many people?</option>
             <option value="1">1</option>
@@ -72,28 +71,28 @@
             <option value="5">5+</option>
         </select>
 
-        <!-- Submit Button -->
+        
         <button type="submit">Book Now</button>
     </form>
 
     <script>
-        // Initialize the Telegram Web App
+        
         const tg = Telegram.WebApp;
         console.log("Telegram Web App initialized:", tg);
 
-        // Expand the Mini App to full height
+       
         tg.expand();
 
-        // Get the user's Telegram username
+        
         const username = tg.initDataUnsafe.user?.username || "Unknown";
         console.log("User's Telegram username:", username);
 
-        // Handle form submission
+        
         const form = document.getElementById('booking-form');
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            // Collect form data
+            
             const formData = new FormData(form);
             const data = {
                 username: username,
@@ -102,14 +101,14 @@
                 passengers: formData.get('passengers')
             };
 
-            // Log the data to the console (for debugging)
+            
             console.log("Data to send:", data);
 
-            // Send data back to the bot
+            
             tg.sendData(JSON.stringify(data));
             console.log("Data sent to bot.");
 
-            // Close the Mini App
+            
             tg.close();
             console.log("Mini App closed.");
         });
